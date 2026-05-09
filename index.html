@@ -349,10 +349,16 @@
         const SUPABASE_URL = "https://xdjlmjpndqwjbflrzbyw.supabase.co";
         const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhkamxtanBuZHF3amJmbHJ6Ynl3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgzMzM2OTcsImV4cCI6MjA5MzkwOTY5N30.2smG7gJV9MAEhRCC_WjZW59VF4002qcXnE8OQ5yQ5OI";
         
- let supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
-    auth: {
-        redirectTo: 'https://qoxfdcyd2654.github.io/RiUan/'
-    }
+// Создаём клиент (без третьего параметра)
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// Проверяем, что auth есть (уже должно работать)
+console.log("supabase.auth:", supabase.auth); // Должен быть объект
+
+// Кнопка входа через Google с явным redirectTo
+document.getElementById('googleBtn').onclick = () => supabase.auth.signInWithOAuth({ 
+    provider: 'google',
+    options: { redirectTo: 'https://qoxfdcyd2654.github.io/RiUan/' }
 });
         let currentUser = null;
 
@@ -379,7 +385,6 @@
             if (error) alert(error.message);
             else alert("Проверьте почту для подтверждения!");
         };
-        document.getElementById('googleBtn').onclick = () => supabase.auth.signInWithOAuth({ provider: 'google' });
         document.getElementById('logoutBtn').onclick = async () => { await supabase.auth.signOut(); location.reload(); };
 
         // send message
