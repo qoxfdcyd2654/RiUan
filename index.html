@@ -349,7 +349,11 @@
         const SUPABASE_URL = "https://xdjlmjpndqwjbflrzbyw.supabase.co";
         const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhkamxtanBuZHF3amJmbHJ6Ynl3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgzMzM2OTcsImV4cCI6MjA5MzkwOTY5N30.2smG7gJV9MAEhRCC_WjZW59VF4002qcXnE8OQ5yQ5OI";
         
-        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+ const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+    auth: {
+        redirectTo: 'https://qoxfdcyd2654.github.io/RiUan/'
+    }
+});
         let currentUser = null;
 
         const authPanel = document.getElementById('authPanel');
