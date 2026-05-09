@@ -420,11 +420,16 @@ document.getElementById('googleBtn').onclick = () => supabase.auth.signInWithOAu
 
         function escapeHtml(str) { return str.replace(/[&<>]/g, function(m){ if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
 
-        function subscribeMessages() {
-            supabase.channel('public:messages')
-                .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages' }, () => { if(currentUser) loadMessages(); })
-                .subscribe();
-        }
+function subscribeMessages() {
+    if (isSubscribed) return;
+    isSubscribed = true;
+    supabase
+        .channel('public:messages')
+        .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages' }, () => {
+            if (currentUser) loadMessages();
+        })
+        .subscribe();
+}
 
         async function initSession(session) {
             if (!session) return;
