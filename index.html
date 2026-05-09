@@ -361,6 +361,7 @@ document.getElementById('googleBtn').onclick = () => supabase.auth.signInWithOAu
     options: { redirectTo: 'https://qoxfdcyd2654.github.io/RiUan/' }
 });
         let currentUser = null;
+        let isSubscribed = false;
 
         const authPanel = document.getElementById('authPanel');
         const chatPanel = document.getElementById('chatPanel');
